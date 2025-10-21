@@ -56,6 +56,69 @@
 .temp-label {
   font-size: 1rem;
   opacity: 0.9;
+  margin-bottom: 10px;
+}
+
+.high-low {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+.high-low .separator {
+  opacity: 0.5;
+}
+
+/* 服装アドバイス */
+.clothing-advice {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.clothing-advice h2 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  text-align: center;
+  color: white;
+}
+
+.advice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.advice-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 12px 15px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.advice-item:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(5px);
+}
+
+.advice-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.advice-text {
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 .comparisons {
@@ -148,6 +211,17 @@
   align-items: center;
   font-size: 0.9rem;
   color: #666;
+}
+
+.temp-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.high-low-small {
+  font-size: 0.8rem;
+  color: #888;
 }
 
 .change-value {
