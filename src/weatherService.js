@@ -139,16 +139,37 @@ export function getUserLocation() {
       return;
     }
 
+    const options = {
+      enableHighAccuracy: true, // 高精度モード（GPS使用）
+      timeout: 10000, // 10秒でタイムアウト
+      maximumAge: 0 // キャッシュを使わない
+    };
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         resolve({
           latitude: position.coords.latitude,
-          longitude: position.coords.longitude
+          longitude: position.coords.longitude,
+          accuracy: position.coords.accuracy // 精度情報も返す
         });
       },
       (error) => {
-        reject(error);
-      }
+        // エラーの種類に応じたメッセージ
+        let errorMessage = '位置情報の取得に失敗しました';
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = '位置情報の使用が拒否されました';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = '位置情報が利用できません';
+            break;
+          case error.TIMEOUT:
+            errorMessage = '位置情報の取得がタイムアウトしました';
+            break;
+        }
+        reject(new Error(errorMessage));
+      },
+      options
     );
   });
 }

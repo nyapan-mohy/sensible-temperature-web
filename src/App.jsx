@@ -20,6 +20,7 @@ function App() {
   const [comparisons, setComparisons] = useState([])
   const [clothingAdvice, setClothingAdvice] = useState([])
   const [location, setLocation] = useState(null)
+  const [coordinates, setCoordinates] = useState(null)
 
   useEffect(() => {
     loadWeatherData()
@@ -34,11 +35,22 @@ function App() {
       let coords = { latitude: 35.6762, longitude: 139.6503 } // 東京
 
       try {
-        coords = await getUserLocation()
+        const userLocation = await getUserLocation()
+        coords = userLocation
         setLocation('現在地')
+        setCoordinates({
+          lat: userLocation.latitude.toFixed(4),
+          lon: userLocation.longitude.toFixed(4),
+          accuracy: userLocation.accuracy ? Math.round(userLocation.accuracy) : null
+        })
       } catch (locError) {
         setLocation('東京（デフォルト）')
-        console.log('位置情報の取得に失敗しました。東京のデータを表示します。')
+        setCoordinates({
+          lat: coords.latitude.toFixed(4),
+          lon: coords.longitude.toFixed(4),
+          accuracy: null
+        })
+        console.log('位置情報の取得に失敗しました。東京のデータを表示します。', locError.message)
       }
 
       // 気象データを取得
@@ -118,6 +130,14 @@ function App() {
         <div className="header">
           <h1>相対体感温度</h1>
           <p className="location">{location}</p>
+          {coordinates && (
+            <p className="coordinates">
+              {coordinates.lat}, {coordinates.lon}
+              {coordinates.accuracy && (
+                <span className="accuracy"> (精度: ±{coordinates.accuracy}m)</span>
+              )}
+            </p>
+          )}
         </div>
 
         <div className="current-temp">
