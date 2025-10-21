@@ -21,6 +21,18 @@ npm run dev
 npm run build
 ```
 
+## デプロイ
+
+GitHub Pagesにデプロイ:
+
+```bash
+npm run deploy
+```
+
+デプロイ後、GitHubリポジトリの Settings > Pages で、Source を「gh-pages」ブランチに設定してください。
+
+アプリは `https://[ユーザー名].github.io/sensible-temperature-web/` でアクセスできます。
+
 ## 技術スタック
 
 - React
